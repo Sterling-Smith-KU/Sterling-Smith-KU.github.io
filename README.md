@@ -1,7 +1,7 @@
 # Sterling Smith — Personal Site
 
 A fast, static, dependency-free personal site. Built from your LinkedIn, styled
-in the spirit of [lusion.co](https://lusion.co/) and [matthewbisbee.com](https://matthewbisbee.com/).
+in the spirit of [lusion.co](https://lusion.co/)
 
 ---
 
