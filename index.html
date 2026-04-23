@@ -3,20 +3,30 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <!-- EDIT: page title shown in the browser tab and in Google results -->
   <title>Sterling Smith — Electrical Engineering @ KU</title>
   <!-- EDIT: one-line description (Google shows ~160 chars) -->
   <meta name="description" content="Sterling Smith — SELF Fellow and Honors Electrical Engineering student at the University of Kansas. Business analyst, entrepreneur, YEPKC Scholar 2024." />
-  <meta name="theme-color" content="#0b0b0c" />
+  <meta name="theme-color" content="#f6f2e9" />
   <meta property="og:title" content="Sterling Smith" />
   <meta property="og:description" content="Electrical Engineering @ KU · Business Analyst · Founder" />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,300;9..144,0,400;9..144,0,500;9..144,1,300;9..144,1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Three.js module map for the hero 3D scene -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.161.0/build/three.module.js"
+    }
+  }
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -39,9 +49,9 @@
       <span class="nav__brand-name">Sterling Smith</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="#about" data-cursor="link">About</a>
-      <a href="#experience" data-cursor="link">Work</a>
-      <a href="#education" data-cursor="link">Education</a>
+      <a href="#hero" data-cursor="link">Home</a>
+      <a href="#experience" data-cursor="link">Projects</a>
+      <a href="#education" data-cursor="link">Resume</a>
       <a href="#contact" data-cursor="link">Contact</a>
     </nav>
     <a class="nav__cta magnetic" href="mailto:sterling@ku.edu" data-cursor="link">
@@ -53,10 +63,15 @@
   <main id="main">
 
     <section id="hero" class="hero">
+      <!-- WebGL canvas — the Three.js distorted sphere lives here -->
+      <canvas class="hero__canvas" id="gl" aria-hidden="true"></canvas>
+
       <div class="hero__meta" data-reveal>
         <span class="dot"></span>
         <span>Available for Summer 2026 internships</span>
       </div>
+
+      <p class="hero__greet" data-reveal>Hi, I'm</p>
 
       <h1 class="hero__title">
         <span class="line" data-reveal><span class="line__inner">Sterling</span></span>
@@ -67,8 +82,22 @@
         <p>
           Honors Electrical Engineering student at the
           <a href="https://ku.edu" target="_blank" rel="noopener" data-cursor="link">University of Kansas</a>,
-          SELF Fellow, and YEPKC Scholar — working at the edge of engineering, business, and building things people use.
+          SELF Fellow, and YEPKC Scholar — I like building things, breaking them, and figuring out how to make them pay for themselves.
         </p>
+      </div>
+
+      <!-- EDIT: these are the emoji CTAs. Change the href, emoji, or label.
+           Add more by copying one <a class="cta"> block. -->
+      <div class="hero__cta" data-reveal>
+        <a href="#experience" class="cta magnetic" data-cursor="link">
+          <span class="emoji">🛠️</span><span>Projects</span>
+        </a>
+        <a href="#education" class="cta magnetic" data-cursor="link">
+          <span class="emoji">📄</span><span>Resume</span>
+        </a>
+        <a href="mailto:sterling@ku.edu" class="cta cta--primary magnetic" data-cursor="link">
+          <span class="emoji">✉️</span><span>Let's talk</span>
+        </a>
       </div>
 
       <div class="hero__foot">
@@ -76,61 +105,48 @@
           <span>Scroll</span>
           <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <div class="hero__marquee" aria-hidden="true">
-          <div class="marquee">
-            <div class="marquee__track">
-              <span>KU Innovation Park</span><span>·</span>
-              <span>Honeywell</span><span>·</span>
-              <span>Kiewit</span><span>·</span>
-              <span>The Catalyst</span><span>·</span>
-              <span>YEPKC</span><span>·</span>
-              <span>Space Promotional</span><span>·</span>
-              <span>KU Innovation Park</span><span>·</span>
-              <span>Honeywell</span><span>·</span>
-              <span>Kiewit</span><span>·</span>
-              <span>The Catalyst</span><span>·</span>
-              <span>YEPKC</span><span>·</span>
-              <span>Space Promotional</span><span>·</span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
+
+    <div class="stars" data-reveal aria-hidden="true"><span>*</span><span>*</span><span>*</span></div>
 
     <section id="about" class="about">
       <div class="section__label" data-reveal>
-        <span>01</span><span>About</span>
+        <span>1</span><span>About</span>
       </div>
-      <div class="about__grid">
-        <p class="about__lead" data-reveal>
-          I'm studying Electrical Engineering in the Honors Program at the University of Kansas —
-          with a habit of picking up entrepreneurship, finance, and consulting work on the side.
+
+      <p class="about__lead" data-reveal>
+        Electrical engineering by major, <em>entrepreneur</em> by habit.
+      </p>
+
+      <div class="about__body" data-reveal>
+        <p>
+          I grew up in Overland Park, Kansas, and most of what I know about building things
+          I learned by actually doing it — starting a promotional products company in high
+          school, working through the Kiewit LEAD program on a clean water treatment
+          facility, and shadowing founders through the Young Entrepreneurs Program.
         </p>
-        <div class="about__body" data-reveal>
-          <p>
-            I grew up in Overland Park, Kansas. Most of what I know about building things I learned by
-            actually doing it — starting a promotional products company in high school,
-            working through the Kiewit LEAD program on a clean water treatment facility,
-            and shadowing founders through the Young Entrepreneurs Program.
-          </p>
-          <p>
-            Now I split my time between the KU Innovation Park, where I consult with bioscience and tech
-            startups as a Business Analyst, and KU's School of Engineering. I like problems that sit between
-            disciplines — where electrical, financial, and product thinking collide.
-          </p>
-        </div>
-        <dl class="about__facts" data-reveal>
-          <div><dt>Based in</dt><dd>Overland Park, Kansas</dd></div>
-          <div><dt>Currently</dt><dd>BSEE @ KU · '28</dd></div>
-          <div><dt>Fellowships</dt><dd>SELF · YEPKC '24</dd></div>
-          <div><dt>Interests</dt><dd>Hardware, startups, coffee</dd></div>
-        </dl>
+        <p>
+          Now I split my time between the KU Innovation Park, where I consult with
+          bioscience and tech startups as a Business Analyst, and KU's School of
+          Engineering. I like problems that sit between disciplines — where electrical,
+          financial, and product thinking collide.
+        </p>
       </div>
+
+      <dl class="about__facts" data-reveal>
+        <div><dt>Based in</dt><dd>Overland Park, Kansas</dd></div>
+        <div><dt>Currently</dt><dd>BSEE @ KU · '28</dd></div>
+        <div><dt>Fellowships</dt><dd>SELF · YEPKC '24</dd></div>
+        <div><dt>Interests</dt><dd>Hardware, startups, coffee</dd></div>
+      </dl>
     </section>
+
+    <div class="stars" data-reveal aria-hidden="true"><span>*</span><span>*</span><span>*</span></div>
 
     <section id="experience" class="exp">
       <div class="section__label" data-reveal>
-        <span>02</span><span>Selected Work</span>
+        <span>2</span><span>Selected Work</span>
       </div>
 
       <!-- ============================================================
@@ -252,10 +268,13 @@
       </ol>
     </section>
 
+    <div class="stars" data-reveal aria-hidden="true"><span>*</span><span>*</span><span>*</span></div>
+
     <section id="education" class="edu">
       <div class="section__label" data-reveal>
-        <span>03</span><span>Education</span>
+        <span>3</span><span>Education</span>
       </div>
+
       <!-- ============================================================
            EDUCATION — copy an <article class="edu__item"> to add a school.
            ============================================================ -->
@@ -300,9 +319,11 @@
       </div>
     </section>
 
+    <div class="stars" data-reveal aria-hidden="true"><span>*</span><span>*</span><span>*</span></div>
+
     <section id="contact" class="contact">
       <div class="section__label" data-reveal>
-        <span>04</span><span>Contact</span>
+        <span>4</span><span>Contact</span>
       </div>
 
       <h2 class="contact__head" data-reveal>
@@ -311,8 +332,8 @@
       </h2>
 
       <p class="contact__lead" data-reveal>
-        Looking for a Summer 2026 internship in electrical engineering, hardware, or technical consulting.
-        Always up for a coffee in Lawrence or the KC Metro.
+        Looking for a Summer 2026 internship in electrical engineering, hardware, or
+        technical consulting. Always up for a coffee in Lawrence or the KC Metro.
       </p>
 
       <div class="contact__links" data-reveal>
@@ -345,5 +366,6 @@
   </footer>
 
   <script src="script.js" defer></script>
+  <script type="module" src="hero3d.js"></script>
 </body>
 </html>
