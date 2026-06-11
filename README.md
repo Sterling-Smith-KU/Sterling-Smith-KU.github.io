@@ -13,8 +13,32 @@ in the spirit of [lusion.co](https://lusion.co/) and [matthewbisbee.com](https:/
 | `styles.css` | All styling. Colors and spacing at the top as CSS variables. |
 | `script.js` | Custom cursor, scroll reveals, magnetic buttons, scroll progress. |
 | `page-template.html` | Boilerplate to duplicate when adding a new page. |
+| `blindspots.html` | BlindSpots 2026, a standalone color-calendar app (see below). |
+| `blindspots.css` | Styles for BlindSpots only. Does not touch the home page. |
+| `blindspots.js` | BlindSpots app logic: views, charts, URL sharing. |
+| `blindspots-data-1.js` / `-2.js` | The dataset: 30 professions, 240 sourced stats. |
 
 No build step, no framework. Open `index.html` in any browser and it works.
+
+---
+
+## BlindSpots 2026 (`blindspots.html`)
+
+A second, fully standalone site in this repo, styled after the Chroma2026
+color-a-day calendar. Visitors pick their profession from a list of 30, and
+every day of 2026 shows a chart, a statistic about that profession's blind
+spots (quiet costs and quiet wins), and a link to the source.
+
+- **Views:** Day / Week / Month / Year, switchable in the top bar.
+- **Sharing:** the URL hash carries profession + view + date
+  (`blindspots.html#p=therapist&v=day&d=2026-06-10`), so any moment of the
+  site can be shared as a plain link. The link icon in the top bar copies it.
+- **Data:** `blindspots-data-1.js` and `-2.js` hold 8 stats per profession.
+  Each stat has a title, text, tone (`blind`/`bright`), chart spec, and source.
+  Add or edit stats there; nothing else needs to change.
+- **No dependencies, no build.** Deploys anywhere the rest of the site does.
+  Once pushed to GitHub Pages it is live at
+  `https://<your-username>.github.io/blindspots.html`.
 
 ---
 

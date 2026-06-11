@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>BlindSpots 2026 — A Year of Stats Your Profession Doesn't See</title>
+  <meta name="description" content="Pick your profession and get a daily, sourced statistic about its blind spots: the quiet costs and the quiet wins. 30 professions, 365 days, every stat sourced." />
+  <meta name="theme-color" content="#f4f6f9" />
+  <meta property="og:title" content="BlindSpots 2026" />
+  <meta property="og:description" content="A year of daily, sourced statistics about your profession's blind spots." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="blindspots.css?v=2" />
+</head>
+<body>
+
+  <!-- ============================================================
+       GATE — profession picker shown on first visit. Hides once a
+       profession is chosen (saved in localStorage + the URL hash so
+       shared links open straight to the right profession).
+       ============================================================ -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle" hidden>
+    <div class="gate__card">
+      <div class="gate__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="26" height="26"><path d="M12 5c-5 0-8.6 4.2-9.8 6.3a1.4 1.4 0 0 0 0 1.4C3.4 14.8 7 19 12 19s8.6-4.2 9.8-6.3a1.4 1.4 0 0 0 0-1.4C20.6 9.2 17 5 12 5Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </div>
+      <h1 class="gate__title" id="gateTitle">What is your profession?</h1>
+      <p class="gate__sub">
+        Every profession has blind spots: quiet costs nobody talks about and quiet wins
+        nobody celebrates. Pick yours and get a year of daily statistics about them,
+        each one with a chart and a source.
+      </p>
+      <div class="gate__row">
+        <div class="gate__select-wrap">
+          <select id="gateSelect" class="gate__select" aria-label="Your profession">
+            <option value="" selected disabled>Choose from 30 professions…</option>
+          </select>
+          <svg class="gate__chevron" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <button id="gateGo" class="gate__go" type="button" disabled>Show me my year</button>
+      </div>
+      <p class="gate__fine">No account, no tracking. Your answer stays in your browser and in the link you share.</p>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       TOP BAR — logo left, view tabs + actions right.
+       ============================================================ -->
+  <header class="topbar" id="topbar">
+    <a class="brand" href="#" id="brandLink">
+      <span class="brand__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5c-5 0-8.6 4.2-9.8 6.3a1.4 1.4 0 0 0 0 1.4C3.4 14.8 7 19 12 19s8.6-4.2 9.8-6.3a1.4 1.4 0 0 0 0-1.4C20.6 9.2 17 5 12 5Z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+      </span>
+      <span class="brand__name">Blind<span>Spots</span></span>
+    </a>
+
+    <div class="topbar__right">
+      <nav class="tabs" id="tabs" aria-label="View">
+        <button class="tab" data-view="day" type="button">Day</button>
+        <button class="tab" data-view="week" type="button">Week</button>
+        <button class="tab" data-view="month" type="button">Month</button>
+        <button class="tab" data-view="year" type="button">Year</button>
+      </nav>
+      <button class="iconbtn" id="btnProf" type="button" title="Switch profession" aria-label="Switch profession">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 19.5c1.2-3.2 3.8-4.8 7-4.8s5.8 1.6 7 4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <button class="iconbtn" id="btnShare" type="button" title="Copy share link" aria-label="Copy share link">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3.2-3.2a4.5 4.5 0 1 0-6.4-6.4L11.6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3.2 3.2a4.5 4.5 0 1 0 6.4 6.4L12.4 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Views are rendered here by blindspots.js -->
+  <main id="app"></main>
+
+  <footer class="foot">
+    <p>Made by <a href="https://www.linkedin.com/in/sterling-ku/" target="_blank" rel="noopener">Sterling Smith</a></p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="blindspots-data-1.js?v=3"></script>
+  <script src="blindspots-data-2.js?v=3"></script>
+  <script src="blindspots.js?v=3" defer></script>
+</body>
+</html>
